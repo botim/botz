@@ -13,8 +13,9 @@
     "content_scripts": [
       {
         "matches": ["*://*.twitter.com/*"],
-        "js": ["tweet.js","botz.js"]
+        "js": ["jquery-3.3.1.js", "botz.js", "api-gateway.js", "tweet.js"]
       }
-    ]
-  
+    ],
+
+    "permissions": ["*://developer.twitter.com/*", "notifications"]
   }
