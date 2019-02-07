@@ -1,13 +1,22 @@
 class MockApiGateway {
+    constructor() {
+        this.cache = {};
+    }
+
     /**
      * Gets the probality of a user being a bot.
      * @param {number} id 
      */
     getScore (id) {
-        return Math.random() * 100;
+        if (!this.cache.hasOwnProperty(id)) {
+            var score = Math.random() * 100;
+            this.cache[id] = score;
+        }
+        return this.cache[id];
     }
 }
 
+gateway = new MockApiGateway();
 function getApiGateway() {
-    return MockApiGateway();
+    return gateway;
 }
