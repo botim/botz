@@ -14,7 +14,7 @@
       {
         "matches": ["*://*.twitter.com/*"],
 <<<<<<< HEAD
-        "js": ["jquery-3.3.1.js", "botz.js", "api-gateway.js" ]
+        "js": ["jquery-3.3.1.js", "botz.js", "api-gateway.js", "tweet.js"]
 =======
         "js": ["tweet.js","botz.js"]
 >>>>>>> master
