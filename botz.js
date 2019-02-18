@@ -10,14 +10,15 @@ $(document).ready(function () {
         for (var mutation of mutationsList) {
             if (mutation.type == 'childList') {
                 if (mutation.addedNodes.length > 0) {
-                    var nodes = $("div.tweet");
-                    for (i = 0; i < nodes.length; i++) {
-                        if (nodes[i] != null) {
-                            tweet = new Tweet(nodes[i]);
-                            if (getApiGateway().getScore(tweet.userID) > 60) {
-                                tweet.setBorder("solid 1px red");
-                            }
-                        }
+                    var nodes = $("div.tweet").filter( function (i) { return !!i; });
+                    for (node of nodes) {
+                          try {
+                            tweet = new Tweet(node);
+                            getApiGateway().markIfBot(tweet);
+                          }
+                          catch (e) {
+                            console.error(e);
+                          }
                     }
                 }
             }
@@ -31,5 +32,3 @@ $(document).ready(function () {
     observer.observe(targetNode, config);
 
 });
-
-
