@@ -3,7 +3,6 @@ class MockApiGateway {
         window.localStorage.botz = window.localStorage.botz || JSON.stringify({});
     }
 
-
     getCache() {
       return JSON.parse(window.localStorage.botz);
     }
@@ -45,7 +44,6 @@ class MockApiGateway {
       // todo: use the actual response
       return true;
     }
-
 }
 
 gateway = new MockApiGateway();
