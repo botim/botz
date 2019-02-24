@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "pretty": true,
+    "newLine": "lf",
+    "strict": false,
+    "noImplicitReturns": false,
+    "noEmitOnError": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}

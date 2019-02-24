@@ -1,0 +1,19 @@
+{
+  "name": "botz",
+  "description": "Recognizes suspicious social media behavior.",
+  "version": "1.0.0",
+  "repository": "https://github.com/botimonline/botz.git",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  }
+}

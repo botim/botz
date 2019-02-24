@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Botz",
+  "version": "1.0",
+  "description": "Recognizes suspicious social media behavior.",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitter.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png"
+  ],
+  "permissions": ["*://developer.twitter.com/*", "notifications"]
+}
