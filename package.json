@@ -7,9 +7,12 @@
   "scripts": {
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "contrib:add": "all-contributors add",
+    "contrib:gen": "all-contributors generate"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.1.2",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
     "husky": "^1.3.1",
