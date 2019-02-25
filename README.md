@@ -8,6 +8,17 @@ Thanks to anyone who participated in botim.online Hackathons!
 
 Visit <https://botim.online> to support the project and to submit bot reports.
 
+## Table of Contents
+
+- [Development](#development)
+- [Using the extension](#using-the-extension)
+  - [Chrome](#chrome)
+  - [Firefox](#firefox)
+- [Contributing](#contributing)
+  - [Prerequisites](#prerequisites)
+  - [Submitting Changes](#submitting-changes)
+- [Contributors](#contributors)
+
 ## Development
 
 1. Clone to your computer.
@@ -28,7 +39,7 @@ Visit <https://botim.online> to support the project and to submit bot reports.
 
 ## Using the extension
 
-## Chrome
+### Chrome
 
 1. Access `chrome://extensions`.
 1. Enable `Developer mode`.
@@ -36,7 +47,7 @@ Visit <https://botim.online> to support the project and to submit bot reports.
 1. You **must** reload the extension after each change in the code.
    <img src="assets/chrome.png" width="500" />
 
-## Firefox
+### Firefox
 
 1. Access `about:debugging`.
 2. Select `Enable add-on debugging`.
