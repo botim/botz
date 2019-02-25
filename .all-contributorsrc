@@ -1,0 +1,82 @@
+{
+  "projectName": "botz",
+  "projectOwner": "botim.online",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 36,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "noam-r",
+      "name": "Noam R",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/23420607?v=4",
+      "profile": "https://b48.club",
+      "contributions": [
+        "business",
+        "content",
+        "eventOrganizing",
+        "ideas",
+        "security",
+        "talk"
+      ]
+    },
+    {
+      "login": "yuvadm",
+      "name": "Yuval Adam",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/315080?v=4",
+      "profile": "https://yuv.al",
+      "contributions": [
+        "business",
+        "content",
+        "eventOrganizing",
+        "ideas",
+        "security",
+        "talk"
+      ]
+    },
+    {
+      "login": "ceranco",
+      "name": "Eran Cohen",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/22302978?v=4",
+      "profile": "https://github.com/ceranco",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "TomKizaru",
+      "name": "TomKizaru",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18573920?v=4",
+      "profile": "https://github.com/TomKizaru",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "eranshmil",
+      "name": "Eran Shmil",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/9721664?v=4",
+      "profile": "https://twitter.com/eranshmil",
+      "contributions": [
+        "ideas",
+        "infra",
+        "code"
+      ]
+    },
+    {
+      "login": "abloch",
+      "name": "Akiva",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1175033?v=4",
+      "profile": "http://t35t37.wordpress.com/",
+      "contributions": [
+        "ideas",
+        "infra",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
