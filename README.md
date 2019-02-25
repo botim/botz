@@ -59,9 +59,10 @@ Visit <https://botim.online> to support the project and to submit bot reports.
 
 ## Contributing
 
-Having an problem with the extension? Please open an [Issue](https://github.com/botimonline/botz/issues/new).
+- Having a problem with the extension? Please open an [Issue](https://github.com/botimonline/botz/issues/new).
+- Willing to take your chances with some issue, please post a comment to prevent collision with someone else.
 
-If you would like to contribute to the project, complete the following steps:
+If you would like to contribute some feature/bugfix to the project, complete the following steps:
 
 ### Prerequisites
 
