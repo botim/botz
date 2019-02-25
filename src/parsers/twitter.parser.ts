@@ -27,7 +27,7 @@ export class TwitterParser implements Parser {
   /**
    * Wait for page changes and execute tweets parsing.
    */
-  async handle() {
+  public async handle() {
     await ready(pageChangesSelector);
 
     detectChanges(pageChangesSelector, this._parseTweets.bind(this), {
@@ -53,7 +53,7 @@ export class TwitterParser implements Parser {
   private async _parseTweets() {
     const tweets: NodeListOf<HTMLElement> = document.querySelectorAll(uncheckedTweetsSelector);
 
-    for (let tweet of tweets) {
+    for (const tweet of tweets) {
       const userId = tweet.getAttribute(tweetUserIdAttribute);
 
       if (!userId) {
