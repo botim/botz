@@ -12,7 +12,7 @@ export class ApiService {
       return cachedValue;
     }
 
-    var isBot = await this._callServer(userId as string);
+    const isBot = await this._callServer(userId as string);
     this._storeInCache(userId, isBot);
 
     return isBot;
