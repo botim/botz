@@ -1,0 +1,56 @@
+$url-chrome: 'chrome-extension://__MSG_@@extension_id__/images/';
+$url-mozilla: 'moz-extension://__MSG_@@extension_id__/images/';
+
+@mixin background-image($file) {
+  @at-root {
+    & {
+      background-image: url($url-chrome+$file);
+    }
+
+    @-moz-document url-prefix() {
+      & {
+        background-image: url($url-mozilla+$file);
+      }
+    }
+  }
+}
+
+.botz-detected {
+  &::before {
+    display: block !important;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
+    background-repeat: round;
+    background-size: 24px 24px;
+    opacity: 0.2;
+
+    @include background-image('background.png');
+  }
+
+  .botz-report-button {
+    display: none;
+  }
+}
+
+.botz-report-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+  @include background-image('icon_small.png');
+
+  &:hover {
+    text-decoration: none;
+  }
+}

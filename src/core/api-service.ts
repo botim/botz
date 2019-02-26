@@ -39,7 +39,7 @@ export class ApiService {
 
   private async _callServer(userId: string): Promise<boolean> {
     // todo: use the actual response
-    const response = await fetch(apiUrl);
+    // const response = await fetch(apiUrl);
 
     // return true;
     return userId.search(/^[srneby]/i) >= 0;

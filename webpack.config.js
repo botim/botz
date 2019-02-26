@@ -3,16 +3,17 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const srcFolder = 'src';
 const distFolder = 'dist';
 const srcFileExtensions = ['.ts', '.js'];
-const copyIgnoredFiles = ['*.ts', '*.js'];
+const copyIgnoredFiles = ['*.ts', '*.js', '*.scss'];
 
 module.exports = (env, argv) => ({
   devtool: 'sourcemap',
   entry: {
-    content: `./${srcFolder}/content.ts`
+    content: [`./${srcFolder}/content.ts`, `./${srcFolder}/content.scss`]
   },
   output: {
     path: path.join(__dirname, distFolder),
@@ -22,12 +23,12 @@ module.exports = (env, argv) => ({
     rules: [
       {
         test: /\.(js|ts)$/,
-        use: [
-          {
-            loader: 'ts-loader'
-          }
-        ],
+        use: 'ts-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.png$/i,
@@ -43,7 +44,11 @@ module.exports = (env, argv) => ({
         context: srcFolder,
         ignore: copyIgnoredFiles
       }
-    ])
+    ]),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
   ],
   resolve: {
     extensions: srcFileExtensions
