@@ -4,14 +4,15 @@ import {
   createReportButton,
   VISITED_CLASS as VISITED_ELEMENT_CLASS,
   ApiService,
-  DETECTED_BOT_CLASS
+  DETECTED_BOT_CLASS,
+  VISITED_CLASS
 } from '../core';
 
 import { Parser } from './parser';
 
 const pageChangesSelector = 'body';
 
-const uncheckedTweetsSelector = '.tweet:not(.botz-visited)';
+const uncheckedTweetsSelector = `.tweet:not(.${VISITED_CLASS})`;
 const tweetsSelector = '.tweet';
 const tweetUserIdAttribute = 'data-screen-name'; // TODO: should be changed from username to id
 const reportButtonContainerSelector = '.content';
