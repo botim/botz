@@ -26,10 +26,18 @@ $url-mozilla: 'moz-extension://__MSG_@@extension_id__/images/';
   }
 }
 
+.tweet {
+  .stream-item-header,
+  .permalink-header {
+    // this is important to align the report button with the avatar
+    position: relative;
+  }
+}
+
 .botz-report-button {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -6px;
+  left: -64px;
   z-index: 2;
   width: 24px;
   height: 24px;
