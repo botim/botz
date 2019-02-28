@@ -15,7 +15,7 @@ const pageChangesSelector = 'body';
 const uncheckedTweetsSelector = `.tweet:not(.${VISITED_CLASS})`;
 const tweetsSelector = '.tweet';
 const tweetUserIdAttribute = 'data-screen-name'; // TODO: should be changed from username to id
-const reportButtonContainerSelector = '.content';
+const reportButtonContainerSelector = '.account-group';
 
 export class TwitterParser implements Parser {
   private _apiService: ApiService;
