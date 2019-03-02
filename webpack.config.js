@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const srcFolder = 'src';
 const distFolder = 'dist';
 const srcFileExtensions = ['.ts', '.js'];
-const copyIgnoredFiles = ['*.ts', '*.js', '*.scss'];
+const copyIgnoredFiles = ['*.ts', '*.js', '*.scss', '*.html'];
 
 module.exports = (env, argv) => ({
   devtool: 'sourcemap',
@@ -33,6 +33,10 @@ module.exports = (env, argv) => ({
       {
         test: /\.png$/i,
         use: 'url-loader'
+      },
+      {
+        test: /\.html$/i,
+        use: 'html-loader?exportAsEs6Default'
       }
     ]
   },
