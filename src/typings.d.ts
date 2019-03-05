@@ -1,3 +1,4 @@
 declare module '*.html' {
-  export default '';
+  const content: string;
+  export default content;
 }

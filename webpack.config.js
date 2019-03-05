@@ -14,7 +14,7 @@ const copyIgnoredFiles = ['*.ts', '*.js', '*.scss', '*.html'];
 module.exports = (env, argv) => ({
   devtool: 'sourcemap',
   entry: {
-    content: [`./${srcFolder}/content.ts`, `./${srcFolder}/content.scss`]
+    content: [`./${srcFolder}/content.ts`, `./${srcFolder}/styles/content.scss`]
   },
   output: {
     path: path.join(__dirname, distFolder),
@@ -37,7 +37,7 @@ module.exports = (env, argv) => ({
       },
       {
         test: /\.html$/i,
-        use: 'html-loader?exportAsEs6Default'
+        use: 'html-loader'
       }
     ]
   },
