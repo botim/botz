@@ -1,0 +1,59 @@
+.botz-modal-wrapper {
+  direction: rtl;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  * {
+    font-family: Heebo, Arial !important;
+    font-size: 14px;
+    color: $color-primary-text;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .botz-modal-after-submit {
+    display: none;
+  }
+
+  &.botz-modal-wrapper-submitted {
+    .botz-modal:not(.botz-modal-after-submit) {
+      display: none;
+    }
+
+    .botz-modal-after-submit {
+      display: block;
+    }
+  }
+}
+
+.botz-modal {
+  padding: 24px 24px 16px;
+  box-sizing: border-box;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
+  background-color: $color-secondary-text;
+  border-radius: 4px;
+
+  .botz-modal-title {
+    width: 100%;
+    margin-bottom: 20px;
+    color: $color-secondary;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .botz-modal-content {
+    margin: 20px 0;
+  }
+
+  p {
+    margin: 0 0 12px 0;
+  }
+}

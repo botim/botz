@@ -1,11 +1,14 @@
 import {
+  VISITED_CLASS,
+  DETECTED_BOT_CLASS,
+  REPORTED_BUTTON_CLASS,
   ready,
   detectChanges,
   createReportButton,
-  VISITED_CLASS as VISITED_ELEMENT_CLASS,
   ApiService,
-  DETECTED_BOT_CLASS,
-  VISITED_CLASS
+  Status,
+  ObjectKeyMap,
+  UserData
 } from '../core';
 
 import { Parser } from './parser';
@@ -14,15 +17,21 @@ const pageChangesSelector = 'body';
 
 const uncheckedTweetsSelector = `.tweet:not(.${VISITED_CLASS})`;
 const tweetsSelector = '.tweet';
-const tweetUserIdAttribute = 'data-screen-name'; // TODO: should be changed from username to id
+const tweetIdAttribute = 'data-tweet-id';
+// TODO: change to `data-user-id` when the server is ready
+const tweetUserIdAttribute = 'data-screen-name';
+const tweetUsernameAttribute = 'data-screen-name';
 const reportButtonContainerSelector = '.account-group';
 
 export class TwitterParser implements Parser {
   private _apiService: ApiService;
-  private _reportButtonElement = createReportButton(this._getUserIdFromTweet);
+  private _reportButtonElement: HTMLElement;
 
   constructor() {
     this._apiService = new ApiService();
+
+    // passing the instance, because the button calls the parser methods
+    this._reportButtonElement = createReportButton(this);
   }
 
   /**
@@ -38,14 +47,36 @@ export class TwitterParser implements Parser {
   }
 
   /**
-   * Called when clicking the report button, to get user id from the tweet element.
+   * The post element container (facebook post, tweet, etc).
    *
-   * @param tweet
+   * @param button The report button
    */
-  private _getUserIdFromTweet(button: HTMLElement) {
-    const tweet = button.closest(tweetsSelector);
+  public getPostElement(button: HTMLElement): Element {
+    return button.closest(tweetsSelector);
+  }
 
-    return tweet.getAttribute(tweetUserIdAttribute);
+  /**
+   * Get all the relevant user data from the dom
+   *
+   * @param button The report button
+   */
+  public getUserData(button: HTMLElement): UserData {
+    const tweet = this.getPostElement(button);
+
+    return {
+      postId: tweet.getAttribute(tweetIdAttribute),
+      userId: tweet.getAttribute(tweetUserIdAttribute),
+      username: tweet.getAttribute(tweetUsernameAttribute)
+    };
+  }
+
+  /**
+   * Receive the data from the modal, and send to the server.
+   *
+   * @param data
+   */
+  public async reportUser(data: ObjectKeyMap<string | string[]>) {
+    await new ApiService().report(data);
   }
 
   /**
@@ -72,13 +103,17 @@ export class TwitterParser implements Parser {
    * @param userId
    */
   private async _checkTweet(tweet: HTMLElement, userId: string | number) {
-    tweet.classList.add(VISITED_ELEMENT_CLASS);
+    tweet.classList.add(VISITED_CLASS);
 
     try {
-      const isBot = await this._apiService.checkIfBot(userId);
+      const status = await this._apiService.checkIfBot(userId);
 
-      if (isBot) {
+      if (status === Status.BOT) {
         tweet.classList.add(DETECTED_BOT_CLASS);
+      }
+
+      if (status === Status.REPORTED) {
+        tweet.classList.add(REPORTED_BUTTON_CLASS);
       }
 
       this._addEventListenersToTweet(tweet);

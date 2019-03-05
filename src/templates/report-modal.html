@@ -1,0 +1,42 @@
+<div class="botz-modal-wrapper">
+  <div class="botz-modal">
+    <div class="botz-modal-title">מדוע אתם מדווחים על החשבון {{ username }}?</div>
+
+    <div class="botz-modal-content">
+      <p>
+        <label class="botz-checkbox">
+          <input type="checkbox" name="reasons" value="BOT" checked /> בוט אוטומטי
+          <span class="botz-checkmark"></span>
+        </label>
+
+        <label class="botz-checkbox">
+          <input type="checkbox" name="reasons" value="VIOLENCE" /> אלים
+          <span class="botz-checkmark"></span>
+        </label>
+
+        <label class="botz-checkbox">
+          <input type="checkbox" name="reasons" value="FAKE" /> פרופיל פייק
+          <span class="botz-checkmark"></span>
+        </label>
+      </p>
+
+      <input type="text" name="description" placeholder="מידע נוסף" class="botz-input" />
+    </div>
+
+    <div class="botz-modal-footer">
+      <button class="botz-button botz-submit">דווח</button>
+    </div>
+  </div>
+
+  <div class="botz-modal botz-modal-after-submit">
+    <div class="botz-modal-title">המשתמש {{ username }} דווח</div>
+
+    <div class="botz-modal-content">
+      <p>תודה בעד הדיווח!</p>
+    </div>
+
+    <div class="botz-modal-footer">
+      <button class="botz-button botz-close">סגור</button>
+    </div>
+  </div>
+</div>

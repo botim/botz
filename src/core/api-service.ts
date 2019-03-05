@@ -1,5 +1,8 @@
+import { Status } from './symbols';
+
 const apiUrl = 'https://reqres.in/api/user/1';
 
+// TODO: move storage to indexdb?
 export class ApiService {
   constructor() {
     window.localStorage.botz = window.localStorage.botz || JSON.stringify({});
@@ -13,18 +16,26 @@ export class ApiService {
     }
 
     const isBot = await this._callServer(userId as string);
-    this._storeInCache(userId, isBot);
+    const status = isBot ? Status.BOT : Status.NOT_BOT;
+    this._storeInCache(userId, status);
 
-    return isBot;
+    return status;
+  }
+
+  public async report(body: any): Promise<boolean> {
+    // TODO: send to server
+    this._storeInCache(body.userId, Status.REPORTED);
+
+    return true;
   }
 
   private _getCache() {
     return JSON.parse(window.localStorage.botz);
   }
 
-  private _storeInCache(userId: string | number, isBot: boolean) {
+  private _storeInCache(userId: string | number, value: string) {
     const cache = this._getCache();
-    cache[userId] = isBot;
+    cache[userId] = value;
 
     window.localStorage.setItem('botz', JSON.stringify(cache));
   }
@@ -42,6 +53,6 @@ export class ApiService {
     // const response = await fetch(apiUrl);
 
     // return true;
-    return userId.search(/^[srneby]/i) >= 0;
+    return userId.search(/^[sreby]/i) >= 0;
   }
 }

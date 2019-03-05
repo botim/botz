@@ -1,0 +1,62 @@
+$background-opacity: linear-gradient(
+  to bottom,
+  rgba(255, 255, 255, 0.8) 0%,
+  rgba(255, 255, 255, 0.9) 100%
+);
+
+.botz-detected {
+  background-repeat: round;
+  background-size: 24px 24px;
+
+  background-image: $background-opacity, url($url-chrome+'background.png');
+
+  @-moz-document url-prefix() {
+    background-image: $background-opacity, url($url-mozilla+'background.png');
+  }
+
+  .botz-report-button {
+    display: none;
+  }
+
+  iframe {
+    background-color: #ffffff;
+    border-radius: 0.85714em;
+  }
+}
+
+.tweet {
+  .stream-item-header,
+  .permalink-header {
+    // this is important to align the report button with the avatar
+    position: relative;
+  }
+}
+
+.botz-report-button {
+  position: absolute;
+  top: -6px;
+  left: -64px;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  background-image: url($url-chrome+'icon_small.png');
+
+  @-moz-document url-prefix() {
+    background-image: url($url-mozilla+'icon_small.png');
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.botz-reported-button .botz-report-button {
+  background-image: url($url-chrome+'icon_small_bw.png');
+
+  @-moz-document url-prefix() {
+    background-image: url($url-mozilla+'icon_small_bw.png');
+  }
+}
