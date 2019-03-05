@@ -4,6 +4,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const GoogleFontsPlugin = require('google-fonts-plugin');
 
 const srcFolder = 'src';
 const distFolder = 'dist';
@@ -52,6 +53,16 @@ module.exports = (env, argv) => ({
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css'
+    }),
+    new GoogleFontsPlugin({
+      fonts: [
+        {
+          family: 'Heebo',
+          variants: ['400', '700'],
+          subsets: ['hebrew']
+        }
+      ],
+      formats: ['woff']
     })
   ],
   resolve: {

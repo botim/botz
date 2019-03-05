@@ -10,12 +10,10 @@
     {
       "matches": ["*://*.twitter.com/*"],
       "js": ["content.js"],
-      "css": ["content.css"],
+      "css": ["content.css", "woff.css"],
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": [
-    "*.png"
-  ],
+  "web_accessible_resources": ["images/*.png", "*.css"],
   "permissions": ["*://developer.twitter.com/*", "notifications"]
 }
