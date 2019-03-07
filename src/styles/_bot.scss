@@ -53,6 +53,12 @@ $background-opacity: linear-gradient(
   }
 }
 
+/* Facebook settings */
+#globalContainer .botz-report-button {
+  top: 25px;
+  left: 25px;
+}
+
 .botz-reported-button .botz-report-button {
   background-image: url($url-chrome+'icon_small_bw.png');
 

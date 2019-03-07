@@ -8,7 +8,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.twitter.com/*"],
+      "matches": ["*://*.com/*"],
       "js": ["content.js"],
       "css": ["content.css", "woff.css"],
       "run_at": "document_start"

@@ -1,4 +1,4 @@
-import { Parser, TwitterParser } from './parsers';
+import { Parser, TwitterParser, FacebookParser } from './parsers';
 
 /**
  * Detect social network and run the relevant parser.
@@ -7,14 +7,14 @@ async function bootstrap() {
   const network = window.location.hostname || '';
 
   let parser: Parser;
-
   switch (network) {
     case 'twitter.com':
       parser = new TwitterParser();
       break;
 
-    case 'facebook.com':
-      throw new Error('Facebook not implemented!');
+    case 'www.facebook.com':
+      parser = new FacebookParser();
+      break;
 
     case 'instagram.com':
       throw new Error('Instagram not implemented!');
