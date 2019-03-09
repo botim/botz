@@ -79,7 +79,7 @@ export class TwitterParser implements Parser {
    * @param data
    */
   public async reportUser(data: ObjectKeyMap<string | string[]>) {
-    await this._apiService.report(data);
+    await this._apiService.report({ ...data, platform: "TWITTER" });
   }
 
   /**

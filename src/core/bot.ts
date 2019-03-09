@@ -10,6 +10,8 @@ import {
 import { ObjectKeyMap, UserData } from './symbols';
 import { Parser } from '../parsers';
 
+const STORAGE_AUTH_KEY = 'botzAuthKey';
+
 /**
  * Create a link element to report a user.
  *
@@ -27,9 +29,17 @@ export function createReportButton(parser: Parser): HTMLElement {
     const input = await openModal('report', parser.getUserData(this));
 
     if (input) {
-      postElement.classList.add(REPORTED_BUTTON_CLASS);
-
-      parser.reportUser(input);
+      try {
+        window.localStorage[STORAGE_AUTH_KEY] = input.authKey;
+        await parser.reportUser(input);
+        postElement.classList.add(REPORTED_BUTTON_CLASS);
+      }
+      catch (e) {
+        if (e.status == 401) {
+          delete window.localStorage[STORAGE_AUTH_KEY];
+        }
+        alert(e.message);
+      }
     }
   });
 
@@ -73,7 +83,6 @@ export async function openModal(
     // close modal when clicking on the wrapper
     modalWrapperElement.addEventListener('click', function() {
       this.remove();
-
       resolve();
     });
 
@@ -96,8 +105,8 @@ export async function openModal(
     const authKeyInput: HTMLInputElement = <HTMLInputElement>(
       modalWrapperElement.querySelector(`[name=authKey]`)
     );
-    authKeyInput.value = window.localStorage.botzAuthKey || '';
-    authKeyInput.style.display = window.localStorage.botzAuthKey ? 'none' : 'block';
+    authKeyInput.value = window.localStorage[STORAGE_AUTH_KEY] || '';
+    authKeyInput.style.display = window.localStorage[STORAGE_AUTH_KEY] ? 'none' : 'block';
   });
 }
 
