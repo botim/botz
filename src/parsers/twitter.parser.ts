@@ -8,15 +8,18 @@ import {
   ApiService,
   Status,
   ObjectKeyMap,
-  UserData
+  UserData,
+  Platform
 } from '../core';
 
 import { Parser } from './parser';
 
 const pageChangesSelector = 'body';
 
-const uncheckedTweetsSelector = `.tweet:not(.${VISITED_CLASS})`;
+// TODO: username? handler?
+
 const tweetsSelector = '.tweet';
+const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS})`;
 const tweetIdAttribute = 'data-tweet-id';
 // TODO: change to `data-user-id` when the server is ready
 const tweetUserIdAttribute = 'data-screen-name';
@@ -28,7 +31,7 @@ export class TwitterParser implements Parser {
   private _reportButtonElement: HTMLElement;
 
   constructor() {
-    this._apiService = new ApiService();
+    this._apiService = new ApiService(Platform.TWITTER);
 
     // passing the instance, because the button calls the parser methods
     this._reportButtonElement = createReportButton(this);
@@ -76,7 +79,7 @@ export class TwitterParser implements Parser {
    * @param data
    */
   public async reportUser(data: ObjectKeyMap<string | string[]>) {
-    await new ApiService().report(data);
+    await this._apiService.report(data);
   }
 
   /**
@@ -106,7 +109,7 @@ export class TwitterParser implements Parser {
     tweet.classList.add(VISITED_CLASS);
 
     try {
-      const status = await this._apiService.checkIfBot(userId, 'TWITTER');
+      const status = await this._apiService.checkIfBot(userId);
 
       if (status === Status.BOT) {
         tweet.classList.add(DETECTED_BOT_CLASS);

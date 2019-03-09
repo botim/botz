@@ -22,6 +22,14 @@ $background-opacity: linear-gradient(
     background-color: #ffffff;
     border-radius: 0.85714em;
   }
+
+  // shared post inside a detected bot
+  @include facebook-only() {
+    .botz-visited:not(.botz-detected) {
+      background-color: $facebook-post-background;
+      background-image: none;
+    }
+  }
 }
 
 .tweet {
@@ -50,6 +58,11 @@ $background-opacity: linear-gradient(
 
   &:hover {
     text-decoration: none;
+  }
+
+  @include facebook-only() {
+    top: 3px;
+    left: 3px;
   }
 }
 

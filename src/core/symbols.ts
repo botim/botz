@@ -1,9 +1,17 @@
+export const enum Platform {
+  TWITTER = 'TWITTER',
+  FACEBOOK = 'FACEBOOK',
+  INSTAGRAM = 'INSTAGRAM'
+}
+
 export interface ObjectKeyMap<T = string> {
   [key: string]: T;
 }
 
 export interface UserData {
   postId: string;
+  commentId?: string;
+  replyCommentId?: string;
   userId: string;
   username: string;
 }

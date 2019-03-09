@@ -1,0 +1,5 @@
+@mixin facebook-only($selector: '') {
+  @at-root html[id='facebook'] #{$selector} & {
+    @content;
+  }
+}
