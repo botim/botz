@@ -15,8 +15,10 @@ import { Parser } from './parser';
 
 const pageChangesSelector = 'body';
 
-const uncheckedTweetsSelector = `.tweet:not(.${VISITED_CLASS})`;
+// TODO: username? handler?
+
 const tweetsSelector = '.tweet';
+const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS})`;
 const tweetIdAttribute = 'data-tweet-id';
 // TODO: change to `data-user-id` when the server is ready
 const tweetUserIdAttribute = 'data-screen-name';
@@ -76,7 +78,7 @@ export class TwitterParser implements Parser {
    * @param data
    */
   public async reportUser(data: ObjectKeyMap<string | string[]>) {
-    await new ApiService().report(data);
+    await this._apiService.report(data);
   }
 
   /**
