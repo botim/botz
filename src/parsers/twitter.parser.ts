@@ -106,7 +106,7 @@ export class TwitterParser implements Parser {
     tweet.classList.add(VISITED_CLASS);
 
     try {
-      const status = await this._apiService.checkIfBot(userId);
+      const status = await this._apiService.checkIfBot(userId, 'TWITTER');
 
       if (status === Status.BOT) {
         tweet.classList.add(DETECTED_BOT_CLASS);
