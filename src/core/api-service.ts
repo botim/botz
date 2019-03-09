@@ -26,9 +26,16 @@ export class ApiService {
   }
 
   public async report(body: any): Promise<boolean> {
-    // TODO: send to server
-    this._storeInCache(body.userId, Status.REPORTED);
+    const response = await fetch(
+      apiUrl + "suspected",
+      {  method: 'post', body: JSON.stringify(body), mode: 'no-cors' }
+    );
+    if (response.status == 401) {
+      throw new Error("מפתח מדווח חסר או שגוי");
+    }
+    window.localStorage.botsAuthKey
 
+    this._storeInCache(body.userId, Status.REPORTED);
     return true;
   }
 
