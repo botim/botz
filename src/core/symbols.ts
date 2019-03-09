@@ -4,6 +4,8 @@ export interface ObjectKeyMap<T = string> {
 
 export interface UserData {
   postId: string;
+  commentId?: string;
+  replyCommentId?: string;
   userId: string;
   username: string;
 }

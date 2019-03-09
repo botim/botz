@@ -18,7 +18,7 @@ export interface Parser {
    *
    * @param button The report button
    */
-  getUserData(button: HTMLElement): UserData;
+  getUserData(button: HTMLElement): Partial<UserData>;
 
   /**
    * Receive the data from the modal, and send to the server.

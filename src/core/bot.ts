@@ -42,7 +42,7 @@ export function createReportButton(parser: Parser): HTMLElement {
  * @param name Name of the modal template, '../templates/name-modal.html'
  * @param data Data to replace in the modal and to send to the server
  */
-export async function loadTemplate(name: string, data?: UserData): Promise<string> {
+export async function loadTemplate(name: string, data?: Partial<UserData>): Promise<string> {
   let modalTemplate = await import(`../templates/${name}-modal.html`);
 
   for (const [key, value] of Object.entries(data)) {
@@ -60,7 +60,7 @@ export async function loadTemplate(name: string, data?: UserData): Promise<strin
  */
 export async function openModal(
   name: string,
-  data?: UserData
+  data?: Partial<UserData>
 ): Promise<ObjectKeyMap<string | string[]>> {
   const modalTemplate = await loadTemplate(name, data);
 
