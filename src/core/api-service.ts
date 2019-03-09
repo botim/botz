@@ -1,5 +1,5 @@
 import { API_URL } from './consts';
-import { Status, MessageTypes } from './symbols';
+import { Status, MessageTypes, ObjectKeyMap } from './symbols';
 
 // TODO: move storage to indexdb?
 export class ApiService {
@@ -7,21 +7,22 @@ export class ApiService {
     window.localStorage.botz = window.localStorage.botz || JSON.stringify({});
   }
 
-  public async checkIfBot(userId: string | number) {
-    const cachedValue = this._getFromCache(userId);
-    console.log('_gotCache', userId, cachedValue);
+  public async checkIfBot(userIds: ObjectKeyMap<any>): Promise<ObjectKeyMap<Status>> {
+    const cachedStatuses = this._getFromCache(Object.keys(userIds));
 
-    if (cachedValue) {
-      console.log('returning cached data');
-      return cachedValue;
+    for (const cachedUserId of Object.keys(cachedStatuses)) {
+      delete userIds[cachedUserId];
     }
-    console.log('fetching data for', userId);
-    const botData = await this._callServer([userId as string]);
-    console.log('_callServer', userId, botData);
 
-    this._storeInCache(userId, botData);
+    if (!Object.keys(userIds).length) {
+      return cachedStatuses;
+    }
 
-    return botData;
+    const statuses = await this._callServer(Object.keys(userIds));
+
+    this._storeInCache(statuses);
+
+    return { ...statuses, ...cachedStatuses };
   }
 
   public async report(body: any): Promise<boolean> {
@@ -34,7 +35,7 @@ export class ApiService {
       throw new Error('מפתח מדווח חסר או שגוי');
     }
 
-    this._storeInCache(body.userId, Status.REPORTED);
+    this._storeInCache(body.userId);
     return true;
   }
 
@@ -42,29 +43,33 @@ export class ApiService {
     return JSON.parse(window.localStorage.botz);
   }
 
-  private _storeInCache(userId: string | number, value: string) {
+  private _storeInCache(values: ObjectKeyMap) {
     const cache = this._getCache();
-    cache[userId] = value;
-    console.log('_storeInCache', userId, cache[userId]);
 
-    window.localStorage.setItem('botz', JSON.stringify(cache));
+    const newCache = { ...cache, ...values };
+
+    window.localStorage.setItem('botz', JSON.stringify(newCache));
   }
 
-  private _getFromCache(userId: string | number): string | null {
+  private _getFromCache(userIds: string[]): ObjectKeyMap<Status> {
     const cache = this._getCache();
-    console.log('_getFromCache', userId, cache[userId]);
-    if (userId in cache) {
-      return cache[userId];
+    const cachedUserIds: ObjectKeyMap<Status> = {};
+
+    for (const userId of userIds) {
+      if (userId in cache) {
+        cachedUserIds[userId] = cache[userId];
+      }
     }
+
+    return cachedUserIds;
   }
 
-  private async _callServer(userIds: string[]): Promise<string> {
+  private async _callServer(userIds: string[]): Promise<ObjectKeyMap<Status>> {
     const idsParam = 'userIds[]=' + userIds.join('&userIds[]=');
-    console.log(API_URL + 'confirmed?' + idsParam + '&platform=' + this._platform);
     const response = await fetch(
       `${API_URL}/confirmed?${idsParam}&platform=${this._platform}`
     );
 
-    return response.text();
+    return response.json();
   }
 }
