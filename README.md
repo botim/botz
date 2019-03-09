@@ -37,6 +37,13 @@ Visit <https://botim.online> to support the project and to submit bot reports.
    yarn watch
    ```
 
+2. Creating a zip file:
+
+   ```bash
+   yarn zip
+   ```
+
+
 ## Using the extension
 
 ### Chrome
