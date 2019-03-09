@@ -8,7 +8,8 @@ import {
   ApiService,
   Status,
   ObjectKeyMap,
-  UserData
+  UserData,
+  Platform
 } from '../core';
 
 import { Parser } from './parser';
@@ -52,7 +53,7 @@ export class FacebookParser implements Parser {
 
   constructor() {
     // TODO: platform for local storage
-    this._apiService = new ApiService();
+    this._apiService = new ApiService(Platform.FACEBOOK);
 
     // passing the instance, because the button calls the parser methods
     this._reportButtonElement = createReportButton(this);
