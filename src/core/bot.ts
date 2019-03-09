@@ -93,9 +93,11 @@ export async function openModal(
       .addEventListener('click', () => modalWrapperElement.remove());
 
     // if there's already an authkey in local storage, set it in form and hide authkey input
-    const authKeyInput: HTMLInputElement = <HTMLInputElement>modalWrapperElement.querySelector(`[name=authkey]`);
-    authKeyInput.value = window.localStorage.botzAuthKey || "";
-    authKeyInput.style.display =  window.localStorage.botzAuthKey ? "none" : "block";
+    const authKeyInput: HTMLInputElement = <HTMLInputElement>(
+      modalWrapperElement.querySelector(`[name=authKey]`)
+    );
+    authKeyInput.value = window.localStorage.botzAuthKey || '';
+    authKeyInput.style.display = window.localStorage.botzAuthKey ? 'none' : 'block';
   });
 }
 
