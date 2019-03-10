@@ -28,7 +28,14 @@ export class ApiService {
   public async report(body: any): Promise<boolean> {
     const response = await fetch(
       apiUrl + "suspected",
-      {  method: 'post', body: JSON.stringify(body), mode: 'no-cors' }
+      {
+        method: 'post',
+        body: JSON.stringify(body),
+        mode: 'no-cors', 
+        //'Content-Type': 'application/json',  // TypeScript wont compile this
+        //headers: { 'Content-Type': 'application/json' },  // doesnt work
+        headers: new Headers({ 'Content-Type': 'application/json' }),  // doesnt work
+      }
     );
     if (response.status == 401) {
       throw new Error("מפתח מדווח חסר או שגוי");
