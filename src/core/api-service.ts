@@ -35,7 +35,7 @@ export class ApiService {
       throw new Error('מפתח מדווח חסר או שגוי');
     }
 
-    this._storeInCache(body.userId);
+    this._storeInCache({ [body.userId]: Status.REPORTED });
     return true;
   }
 
