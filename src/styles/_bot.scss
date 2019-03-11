@@ -68,6 +68,7 @@ $background-opacity: linear-gradient(
 }
 
 .botz-reported-button .botz-report-button {
+  pointer-events: none;
   background-image: url($url-chrome+'icon_small_bw.png');
 
   @-moz-document url-prefix() {
