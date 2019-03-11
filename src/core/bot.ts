@@ -5,12 +5,13 @@ import {
   MODAL_SUBMIT_CLASS,
   MODAL_CLOSE_CLASS,
   MODAL_WRAPPER_SUBMITTED_CLASS,
-  REPORTED_BUTTON_CLASS
+  REPORTED_BUTTON_CLASS,
+  MODAL_REPORTER_KEY_SHOW_CLASS as MODAL_HIDE_REPORTER_KEY_CLASS
 } from './consts';
 import { ObjectKeyMap, UserData } from './symbols';
 import { Parser } from '../parsers';
 
-const STORAGE_AUTH_KEY = 'botzAuthKey';
+const STORAGE_REPORTER_KEY = 'botzReporterKey';
 
 /**
  * Create a link element to report a user.
@@ -30,15 +31,12 @@ export function createReportButton(parser: Parser): HTMLElement {
 
     if (input) {
       try {
-        window.localStorage[STORAGE_AUTH_KEY] = input.authKey;
+        window.localStorage[STORAGE_REPORTER_KEY] = input.reporterKey;
         await parser.reportUser(input);
         postElement.classList.add(REPORTED_BUTTON_CLASS);
-      }
-      catch (e) {
-        if (e.status == 401) {
-          delete window.localStorage[STORAGE_AUTH_KEY];
-        }
-        alert(e.message);
+      } catch (error) {
+        delete window.localStorage[STORAGE_REPORTER_KEY];
+        openModal('invalid-reporter-key');
       }
     }
   });
@@ -55,11 +53,31 @@ export function createReportButton(parser: Parser): HTMLElement {
 export async function loadTemplate(name: string, data?: Partial<UserData>): Promise<string> {
   let modalTemplate = await import(`../templates/${name}-modal.html`);
 
+  if (!data) {
+    return modalTemplate;
+  }
+
   for (const [key, value] of Object.entries(data)) {
     modalTemplate = modalTemplate.replace(new RegExp(`{{ ${key} }}`, 'g'), value);
   }
 
   return modalTemplate;
+}
+
+/**
+ * If there's already a reporter key in local storage,
+ *  set it in form and hide reporter key input
+ */
+function initReporterKeyInput(modalWrapperElement: Element) {
+  const reporterKeyInput: HTMLInputElement = modalWrapperElement.querySelector(
+    '[name="reporterKey"]'
+  );
+  const reporterKey = window.localStorage[STORAGE_REPORTER_KEY] || null;
+
+  if (reporterKey) {
+    reporterKeyInput.value = reporterKey;
+    reporterKeyInput.classList.add(MODAL_HIDE_REPORTER_KEY_CLASS);
+  }
 }
 
 /**
@@ -73,6 +91,11 @@ export async function openModal(
   data?: Partial<UserData>
 ): Promise<ObjectKeyMap<string | string[]>> {
   const modalTemplate = await loadTemplate(name, data);
+
+  const openedModal = document.querySelector(`.${MODAL_WRAPPER_CLASS}`);
+  if (openedModal) {
+    openedModal.remove();
+  }
 
   document.body.insertAdjacentHTML('afterbegin', modalTemplate);
 
@@ -90,23 +113,21 @@ export async function openModal(
     modalElement.addEventListener('click', event => event.stopPropagation());
 
     // submit the form data and show thank you modal
-    modalElement.querySelector(`.${MODAL_SUBMIT_CLASS}`).addEventListener('click', () => {
-      modalWrapperElement.classList.add(MODAL_WRAPPER_SUBMITTED_CLASS);
+    const submitButton = modalElement.querySelector(`.${MODAL_SUBMIT_CLASS}`);
+    if (submitButton) {
+      submitButton.addEventListener('click', () => {
+        modalWrapperElement.classList.add(MODAL_WRAPPER_SUBMITTED_CLASS);
 
-      resolve({ ...data, ...getInputData(modalElement) });
-    });
+        resolve({ ...data, ...getInputData(modalElement) });
+      });
+    }
 
     // close button in the thank you modal
     modalWrapperElement
       .querySelector(`.${MODAL_CLOSE_CLASS}`)
       .addEventListener('click', () => modalWrapperElement.remove());
 
-    // if there's already an authkey in local storage, set it in form and hide authkey input
-    const authKeyInput: HTMLInputElement = <HTMLInputElement>(
-      modalWrapperElement.querySelector(`[name=authKey]`)
-    );
-    authKeyInput.value = window.localStorage[STORAGE_AUTH_KEY] || '';
-    authKeyInput.style.display = window.localStorage[STORAGE_AUTH_KEY] ? 'none' : 'block';
+    initReporterKeyInput(modalWrapperElement);
   });
 }
 
