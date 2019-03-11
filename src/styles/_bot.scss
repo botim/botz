@@ -23,12 +23,13 @@ $background-opacity: linear-gradient(
     border-radius: 0.85714em;
   }
 
-  // shared post inside a detected bot
-  @include facebook-only() {
-    .botz-visited:not(.botz-detected) {
-      background-color: $facebook-post-background;
-      background-image: none;
-    }
+  .botz-visited:not(.botz-detected) {
+    background-color: $inner-post-background;
+    background-image: none;
+  }
+
+  .QuoteTweet-innerContainer {
+    border-radius: 12px;
   }
 }
 

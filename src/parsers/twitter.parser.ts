@@ -19,7 +19,8 @@ const pageChangesSelector = 'body';
 // TODO: username? handler?
 
 const tweetsSelector = '.tweet';
-const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS})`;
+const quotedTweetsSelector = '.QuoteTweet-innerContainer';
+const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS}), ${quotedTweetsSelector}:not(.${VISITED_CLASS})`;
 const tweetIdAttribute = 'data-tweet-id';
 const tweetUserIdAttribute = 'data-user-id';
 const tweetUsernameAttribute = 'data-screen-name';
