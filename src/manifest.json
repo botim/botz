@@ -6,14 +6,18 @@
   "icons": {
     "128": "images/icon.png"
   },
+  "background": {
+    "scripts": ["browser-polyfill.min.js", "background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "matches": ["*://*.twitter.com/*", "*://*.facebook.com/*"],
-      "js": ["content.js"],
+      "js": ["browser-polyfill.min.js", "content.js"],
       "css": ["content.css", "woff.css"],
       "run_at": "document_start"
     }
   ],
   "web_accessible_resources": ["images/*.png", "*.css"],
-  "permissions": ["*://developer.twitter.com/*", "notifications"]
+  "permissions": ["notifications"]
 }

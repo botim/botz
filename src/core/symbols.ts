@@ -22,3 +22,7 @@ export const enum Status {
   BOT = 'BOT',
   NOT_BOT = 'NOT_BOT'
 }
+
+export const enum MessageTypes {
+  REPORT = 'REPORT'
+}

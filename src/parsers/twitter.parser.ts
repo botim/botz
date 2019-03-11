@@ -79,7 +79,7 @@ export class TwitterParser implements Parser {
    * @param data
    */
   public async reportUser(data: ObjectKeyMap<string | string[]>) {
-    await this._apiService.report({ ...data, platform: "TWITTER" });
+    await this._apiService.report({ ...data });
   }
 
   /**
@@ -120,8 +120,8 @@ export class TwitterParser implements Parser {
       }
 
       this._addEventListenersToTweet(tweet);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   }
 

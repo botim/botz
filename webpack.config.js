@@ -14,7 +14,8 @@ const copyIgnoredFiles = ['*.ts', '*.js', '*.scss', '*.html'];
 module.exports = (env, argv) => ({
   devtool: 'sourcemap',
   entry: {
-    content: [`./${srcFolder}/content.ts`, `./${srcFolder}/styles/content.scss`]
+    content: [`./${srcFolder}/content.ts`, `./${srcFolder}/styles/content.scss`],
+    background: `./${srcFolder}/background.ts`
   },
   output: {
     path: path.join(__dirname, distFolder),
@@ -48,6 +49,9 @@ module.exports = (env, argv) => ({
         from: '**/*',
         context: srcFolder,
         ignore: copyIgnoredFiles
+      },
+      {
+        from: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js'
       }
     ]),
     new MiniCssExtractPlugin({

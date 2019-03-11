@@ -1,6 +1,5 @@
-import { Status } from './symbols';
-
-const apiUrl = 'http://localhost:8080/bots/';
+import { API_URL } from './consts';
+import { Status, MessageTypes } from './symbols';
 
 // TODO: move storage to indexdb?
 export class ApiService {
@@ -26,21 +25,14 @@ export class ApiService {
   }
 
   public async report(body: any): Promise<boolean> {
-    const response = await fetch(
-      apiUrl + "suspected",
-      {
-        method: 'post',
-        body: JSON.stringify(body),
-        mode: 'no-cors', 
-        //'Content-Type': 'application/json',  // TypeScript wont compile this
-        //headers: { 'Content-Type': 'application/json' },  // doesnt work
-        headers: new Headers({ 'Content-Type': 'application/json' }),  // doesnt work
-      }
-    );
-    if (response.status == 401) {
-      throw new Error("מפתח מדווח חסר או שגוי");
+    const responseStatus: number = await window.browser.runtime.sendMessage({
+      type: MessageTypes.REPORT,
+      body: { ...body, platform: this._platform }
+    });
+
+    if (responseStatus === 401) {
+      throw new Error('מפתח מדווח חסר או שגוי');
     }
-    window.localStorage.botsAuthKey
 
     this._storeInCache(body.userId, Status.REPORTED);
     return true;
@@ -68,9 +60,9 @@ export class ApiService {
 
   private async _callServer(userIds: string[]): Promise<string> {
     const idsParam = 'userIds[]=' + userIds.join('&userIds[]=');
-    console.log(apiUrl + 'confirmed?' + idsParam + '&platform=' + this._platform);
+    console.log(API_URL + 'confirmed?' + idsParam + '&platform=' + this._platform);
     const response = await fetch(
-      apiUrl + 'confirmed?' + idsParam + '&platform=' + this._platform
+      `${API_URL}/confirmed?${idsParam}&platform=${this._platform}`
     );
 
     return response.text();

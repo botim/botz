@@ -13,6 +13,8 @@
     "contrib:gen": "all-contributors generate"
   },
   "devDependencies": {
+    "@types/chrome": "0.0.81",
+    "@types/firefox-webext-browser": "^65.0.2",
     "all-contributors-cli": "^6.1.2",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
@@ -30,6 +32,7 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3",
     "url-loader": "^1.1.2",
+    "webextension-polyfill": "^0.4.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   }
