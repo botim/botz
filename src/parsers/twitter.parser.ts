@@ -19,10 +19,10 @@ const pageChangesSelector = 'body';
 // TODO: username? handler?
 
 const tweetsSelector = '.tweet';
-const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS})`;
+const quotedTweetsSelector = '.QuoteTweet-innerContainer';
+const uncheckedTweetsSelector = `${tweetsSelector}:not(.${VISITED_CLASS}), ${quotedTweetsSelector}:not(.${VISITED_CLASS})`;
 const tweetIdAttribute = 'data-tweet-id';
-// TODO: change to `data-user-id` when the server is ready
-const tweetUserIdAttribute = 'data-screen-name';
+const tweetUserIdAttribute = 'data-user-id';
 const tweetUsernameAttribute = 'data-screen-name';
 const reportButtonContainerSelector = '.account-group';
 
@@ -87,6 +87,11 @@ export class TwitterParser implements Parser {
    */
   private async _parseTweets() {
     const tweets: NodeListOf<HTMLElement> = document.querySelectorAll(uncheckedTweetsSelector);
+    const mappedTweets: ObjectKeyMap<HTMLElement> = {};
+
+    if (!tweets.length) {
+      return;
+    }
 
     for (const tweet of tweets) {
       const userId = tweet.getAttribute(tweetUserIdAttribute);
@@ -95,7 +100,13 @@ export class TwitterParser implements Parser {
         continue;
       }
 
-      this._checkTweet(tweet, userId);
+      mappedTweets[userId] = tweet;
+    }
+
+    const statuses = await this._apiService.checkIfBot({ ...mappedTweets });
+
+    for (const userId of Object.keys(statuses)) {
+      this._checkTweet(mappedTweets[userId], statuses[userId]);
     }
   }
 
@@ -103,14 +114,12 @@ export class TwitterParser implements Parser {
    * Mark tweet as bot after checking against the api.
    *
    * @param tweet
-   * @param userId
+   * @param status
    */
-  private async _checkTweet(tweet: HTMLElement, userId: string | number) {
+  private async _checkTweet(tweet: HTMLElement, status: Status) {
     tweet.classList.add(VISITED_CLASS);
 
     try {
-      const status = await this._apiService.checkIfBot(userId);
-
       if (status === Status.BOT) {
         tweet.classList.add(DETECTED_BOT_CLASS);
       }

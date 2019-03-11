@@ -112,6 +112,8 @@ export class FacebookParser implements Parser {
       uncheckedAllPostsSelectors
     );
 
+    const mappedPosts: ObjectKeyMap<HTMLElement> = {};
+
     for (const post of posts) {
       const userId = this._getUserIdFromPost(post);
 
@@ -119,7 +121,13 @@ export class FacebookParser implements Parser {
         continue;
       }
 
-      this._checkPost(post, userId);
+      mappedPosts[userId] = post;
+    }
+
+    const statuses = await this._apiService.checkIfBot(Object.keys(mappedPosts));
+
+    for (const userId of Object.keys(statuses)) {
+      this._checkPost(mappedPosts[userId], statuses[userId]);
     }
   }
 
@@ -129,12 +137,10 @@ export class FacebookParser implements Parser {
    * @param post
    * @param userId
    */
-  private async _checkPost(post: HTMLElement, userId: string | number) {
+  private async _checkPost(post: HTMLElement, userId: string) {
     post.classList.add(VISITED_CLASS);
 
     try {
-      const status = await this._apiService.checkIfBot(userId);
-
       if (status === Status.BOT) {
         post.classList.add(DETECTED_BOT_CLASS);
       }
