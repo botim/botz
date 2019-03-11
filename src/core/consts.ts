@@ -8,3 +8,5 @@ export const MODAL_WRAPPER_SUBMITTED_CLASS = 'botz-modal-wrapper-submitted';
 export const MODAL_CLASS = 'botz-modal';
 export const MODAL_SUBMIT_CLASS = 'botz-submit';
 export const MODAL_CLOSE_CLASS = 'botz-close';
+
+export const API_URL = process.env.API_URL || 'http://localhost:8080/bots';

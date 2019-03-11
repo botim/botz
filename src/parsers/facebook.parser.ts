@@ -101,7 +101,7 @@ export class FacebookParser implements Parser {
    * @param data
    */
   public async reportUser(data: ObjectKeyMap<string | string[]>) {
-    await this._apiService.report({ ...data, platform: "FACEBOOK" });
+    await this._apiService.report({ ...data });
   }
 
   /**
@@ -144,8 +144,8 @@ export class FacebookParser implements Parser {
       }
 
       this._addEventListenersToPost(post);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   }
 
