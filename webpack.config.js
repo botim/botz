@@ -12,7 +12,7 @@ const srcFileExtensions = ['.ts', '.js'];
 const copyIgnoredFiles = ['*.ts', '*.js', '*.scss', '*.html'];
 
 module.exports = (env, argv) => ({
-  devtool: 'sourcemap',
+  devtool: 'inline-cheap-source-map',
   entry: {
     content: [`./${srcFolder}/content.ts`, `./${srcFolder}/styles/content.scss`],
     background: `./${srcFolder}/background.ts`

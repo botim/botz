@@ -86,6 +86,7 @@ export class TwitterParser implements Parser {
    * Parse all unchecked tweets in the page, to detect if it's a bot.
    */
   private async _parseTweets() {
+    debugger;
     const tweets: NodeListOf<HTMLElement> = document.querySelectorAll(uncheckedTweetsSelector);
     const mappedTweets: ObjectKeyMap<HTMLElement> = {};
 

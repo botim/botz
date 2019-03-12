@@ -1,3 +1,5 @@
+import * as dynamicContentScripts from 'webext-dynamic-content-scripts';
+
 import { MessageTypes } from './core/symbols';
 import { API_URL } from './core/consts';
 
@@ -12,7 +14,7 @@ async function onReportMessage(body: any) {
 }
 
 // handle messages arriving from the content script
-browser.runtime.onMessage.addListener((message, _, respond) => {
+browser.runtime.onMessage.addListener((message, _) => {
   if (!message || !message.type) {
     return;
   }
@@ -21,3 +23,5 @@ browser.runtime.onMessage.addListener((message, _, respond) => {
     return onReportMessage(message.body);
   }
 });
+
+dynamicContentScripts.addToFutureTabs();

@@ -6,18 +6,21 @@
   "icons": {
     "128": "images/icon.png"
   },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
   "background": {
-    "scripts": ["browser-polyfill.min.js", "background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
       "matches": ["*://*.twitter.com/*", "*://*.facebook.com/*"],
-      "js": ["browser-polyfill.min.js", "content.js"],
+      "js": ["content.js"],
       "css": ["content.css", "woff.css"],
       "run_at": "document_start"
     }
   ],
   "web_accessible_resources": ["images/*.png", "*.css"],
-  "permissions": ["notifications"]
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": ["*://*.twitter.com/*", "*://*.facebook.com/*", "*://localhost:8080/*"]
 }

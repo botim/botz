@@ -13,6 +13,7 @@
     "contrib:gen": "all-contributors generate"
   },
   "devDependencies": {
+    "@sindresorhus/tsconfig": "^0.2.1",
     "@types/chrome": "0.0.81",
     "@types/firefox-webext-browser": "^65.0.2",
     "all-contributors-cli": "^6.1.2",
@@ -32,6 +33,7 @@
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3",
     "url-loader": "^1.1.2",
+    "webext-dynamic-content-scripts": "^5.0.2",
     "webextension-polyfill": "^0.4.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"

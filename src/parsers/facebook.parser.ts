@@ -41,7 +41,7 @@ const extractUserIdPattern = /id=(\d+)/;
 const commentLinkSelector =
   '[data-testid="UFI2CommentActionLinks/root"] a[href^="http"], .uiLinkSubtle, a[rel="async"]';
 const commentLinkAttribute = 'href';
-const commentLinkPattern = /^[^\/]*((?<!permalink\/|p\.|posts\/|videos\/).)*(?<postId>\d+)((?<!comment_id=).)*(?<commentId>\d+)*((?<!reply_comment_id=).)*(?<replyCommentId>\d+)*.*$/;
+// const commentLinkPattern = /^[^\/]*((?<!permalink\/|p\.|posts\/|videos\/).)*(?<postId>\d+)((?<!comment_id=).)*(?<commentId>\d+)*((?<!reply_comment_id=).)*(?<replyCommentId>\d+)*.*$/;
 const postCommentFormSelector = '[name="ft_ent_identifier"]';
 const postCommentFormAttribute = 'value';
 
@@ -111,8 +111,11 @@ export class FacebookParser implements Parser {
     const posts: NodeListOf<HTMLElement> = document.querySelectorAll(
       uncheckedAllPostsSelectors
     );
-
     const mappedPosts: ObjectKeyMap<HTMLElement> = {};
+
+    if (!posts.length) {
+      return;
+    }
 
     for (const post of posts) {
       const userId = this._getUserIdFromPost(post);
@@ -124,7 +127,7 @@ export class FacebookParser implements Parser {
       mappedPosts[userId] = post;
     }
 
-    const statuses = await this._apiService.checkIfBot(Object.keys(mappedPosts));
+    const statuses = await this._apiService.checkIfBot({ ...mappedPosts });
 
     for (const userId of Object.keys(statuses)) {
       this._checkPost(mappedPosts[userId], statuses[userId]);
@@ -137,7 +140,7 @@ export class FacebookParser implements Parser {
    * @param post
    * @param userId
    */
-  private async _checkPost(post: HTMLElement, userId: string) {
+  private async _checkPost(post: HTMLElement, status: Status) {
     post.classList.add(VISITED_CLASS);
 
     try {
@@ -231,14 +234,19 @@ export class FacebookParser implements Parser {
 
     // first, try to get from comment link
     if (comment) {
-      const {
-        groups: { postId, commentId, replyCommentId }
-      } = comment.getAttribute(commentLinkAttribute).match(commentLinkPattern);
+      const postId = /permalink\/|p\.|posts\/|videos\/(\d+)$/;
+      console.log(comment.getAttribute(commentLinkAttribute).match(postId));
+
+      // const commentId = /^[^\/]*((?<!permalink\/|p\.|posts\/|videos\/).)*(?<postId>\d+)((?<!comment_id=).)*(?<commentId>\d+)*((?<!reply_comment_id=).)*(?<replyCommentId>\d+)*.*$/;
+      // const replyCommentId = /^[^\/]*((?<!permalink\/|p\.|posts\/|videos\/).)*(?<postId>\d+)((?<!comment_id=).)*(?<commentId>\d+)*((?<!reply_comment_id=).)*(?<replyCommentId>\d+)*.*$/;
+      // const {
+      //   groups: { postId, commentId, replyCommentId }
+      // } = comment.getAttribute(commentLinkAttribute).match(commentLinkPattern);
 
       return {
-        postId,
-        commentId,
-        replyCommentId
+        // postId,
+        // commentId,
+        // replyCommentId
       };
     }
 

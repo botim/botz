@@ -1,9 +1,15 @@
+import 'webext-dynamic-content-scripts';
+import 'webextension-polyfill';
+
+console.error('WHY THE HELL?!!?!?');
+
 import { Parser, TwitterParser, FacebookParser } from './parsers';
 
 /**
  * Detect social network and run the relevant parser.
  */
 async function bootstrap() {
+  debugger;
   let network = window.location.hostname || '';
 
   network = network.replace('www.', '');

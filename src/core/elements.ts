@@ -34,7 +34,7 @@ export function detectChanges(
  * @param selector
  */
 export async function ready(selector: string): Promise<HTMLElement> {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     let elementObserver: MutationObserver;
 
     const observerCallback = () => {

@@ -23,6 +23,11 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@sindresorhus/tsconfig@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/tsconfig/-/tsconfig-0.2.1.tgz#b209d3f2be2c39b4cff39ec5bded7b5154427989"
+  integrity sha512-z/jGJwReg/eHlBUuQkgrQtBo9d+HB0rxu9hYYsnV89dVItMNeohAsHUnfI5y4HHMNyOkFJ+g0a/6lLoPKZehpw==
+
 "@types/chrome@0.0.81":
   version "0.0.81"
   resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.81.tgz#4fbf34c370a60235be4f97f32429e701fb644d10"
@@ -4781,6 +4786,18 @@ watchpack@^1.5.0:
     chokidar "^2.0.2"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+
+webext-content-script-ping@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/webext-content-script-ping/-/webext-content-script-ping-2.0.1.tgz#efccbb795929631008dc08b21c5b34f6cb524b2a"
+  integrity sha512-37oaeT0GwwkIC8JUD5aToOr0ncdoml/kjZdsn5ckyKyZqpNQHYxhP3NhnqsSx25LpxGfJm8er/IPv9pzCLcfUA==
+
+webext-dynamic-content-scripts@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/webext-dynamic-content-scripts/-/webext-dynamic-content-scripts-5.0.2.tgz#cac7ebbe632303713c2bbe7a5181b032af61a11e"
+  integrity sha512-Y2FMB5Rz29UzQ7eUi9lcNUDeAAhvDDY7Ga1UcCbaHmu6ro3tJpJlzgk7HWaxOBuCtsfFyhZPmitC59n6PGlBFA==
+  dependencies:
+    webext-content-script-ping "^2.0.1"
 
 webextension-polyfill@^0.4.0:
   version "0.4.0"
