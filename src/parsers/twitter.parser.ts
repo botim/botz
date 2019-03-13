@@ -103,6 +103,10 @@ export class TwitterParser implements Parser {
       mappedTweets[userId] = tweet;
     }
 
+    if (!Object.keys(mappedTweets).length) {
+      return;
+    }
+
     const statuses = await this._apiService.checkIfBot({ ...mappedTweets });
 
     for (const userId of Object.keys(statuses)) {
