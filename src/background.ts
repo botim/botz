@@ -2,7 +2,7 @@ import { MessageTypes } from './core/symbols';
 import { API_URL } from './core/consts';
 
 async function onReportMessage(body: any) {
-  const response = await fetch(`${API_URL}/suspected`, {
+  const response = await fetch(`${API_URL}/report`, {
     method: 'post',
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' }
