@@ -1,14 +1,15 @@
 import { API_URL } from './consts';
 import { Status, MessageTypes, ObjectKeyMap } from './symbols';
+import { CacheService } from './cache-service';
 
 // TODO: move storage to indexdb?
 export class ApiService {
-  constructor(private _platform: string) {
-    window.localStorage.botz = window.localStorage.botz || JSON.stringify({});
-  }
+  private _cacheService = new CacheService();
+
+  constructor(private _platform: string) {}
 
   public async checkIfBot(userIds: ObjectKeyMap<any>): Promise<ObjectKeyMap<Status>> {
-    const cachedStatuses = this._getFromCache(Object.keys(userIds));
+    const cachedStatuses = await this._getFromCache(Object.keys(userIds));
 
     for (const cachedUserId of Object.keys(cachedStatuses)) {
       delete userIds[cachedUserId];
@@ -38,30 +39,26 @@ export class ApiService {
     this._storeInCache({ [body.userId]: Status.REPORTED });
     return true;
   }
-
-  private _getCache() {
-    return JSON.parse(window.localStorage.botz);
+  private _storeInCache(userStatuses: ObjectKeyMap<Status>) {
+    for (const userId in userStatuses) {
+      if (userStatuses.hasOwnProperty(userId)) {
+        this._cacheService.set(userId, userStatuses[userId]);
+      }
+    }
   }
 
-  private _storeInCache(values: ObjectKeyMap) {
-    const cache = this._getCache();
-
-    const newCache = { ...cache, ...values };
-
-    window.localStorage.setItem('botz', JSON.stringify(newCache));
-  }
-
-  private _getFromCache(userIds: string[]): ObjectKeyMap<Status> {
-    const cache = this._getCache();
-    const cachedUserIds: ObjectKeyMap<Status> = {};
+  private async _getFromCache(userIds: string[]): Promise<ObjectKeyMap<Status>> {
+    const cachedUsers: ObjectKeyMap<Status> = {};
 
     for (const userId of userIds) {
-      if (userId in cache) {
-        cachedUserIds[userId] = cache[userId];
+      const cachedUser = await this._cacheService.get<Status>(userId);
+
+      if (cachedUser) {
+        cachedUsers[userId] = cachedUser;
       }
     }
 
-    return cachedUserIds;
+    return cachedUsers;
   }
 
   private async _callServer(userIds: string[]): Promise<ObjectKeyMap<Status>> {
