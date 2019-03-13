@@ -3,7 +3,7 @@ import { Store, set, get, del } from 'idb-keyval';
 import { CACHE_EXPIRE_MIN } from './consts';
 
 export class CacheService {
-  private _store = new Store('botim', 'botz');
+  private _store = new Store('botim', 'statuses');
 
   /**
    * Store value in store, with last updated key.

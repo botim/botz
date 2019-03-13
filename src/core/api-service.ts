@@ -63,9 +63,7 @@ export class ApiService {
 
   private async _callServer(userIds: string[]): Promise<ObjectKeyMap<Status>> {
     const idsParam = 'userIds[]=' + userIds.join('&userIds[]=');
-    const response = await fetch(
-      `${API_URL}/confirmed?${idsParam}&platform=${this._platform}`
-    );
+    const response = await fetch(`${API_URL}/check?${idsParam}&platform=${this._platform}`);
 
     return response.json();
   }
