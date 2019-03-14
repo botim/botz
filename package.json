@@ -5,7 +5,7 @@
   "repository": "https://github.com/botim/botz.git",
   "license": "GPL-3.0",
   "scripts": {
-    "zip": "npm run build && node scripts/build-zip.js",
+    "zip": "yarn build && node scripts/build-zip.js",
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch",
     "lint": "tslint -p tsconfig.json",
