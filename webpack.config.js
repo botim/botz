@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const { EnvironmentPlugin } = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +11,11 @@ const srcFolder = 'src';
 const distFolder = 'dist';
 const srcFileExtensions = ['.ts', '.js'];
 const copyIgnoredFiles = ['*.ts', '*.js', '*.scss', '*.html'];
+
+const apiUrls = {
+  development: 'http://localhost:8080',
+  production: 'https://botim-backend.herokuapp.com'
+};
 
 module.exports = (env, argv) => ({
   devtool: 'sourcemap',
@@ -43,6 +49,9 @@ module.exports = (env, argv) => ({
     ]
   },
   plugins: [
+    new EnvironmentPlugin({
+      API_URL: apiUrls[argv.mode]
+    }),
     new CleanWebpackPlugin(distFolder),
     new CopyWebpackPlugin([
       {
