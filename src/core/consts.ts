@@ -10,6 +10,7 @@ export const MODAL_SUBMIT_CLASS = 'botz-submit';
 export const MODAL_CLOSE_CLASS = 'botz-close';
 export const MODAL_REPORTER_KEY_SHOW_CLASS = 'hidden';
 
-export const API_URL = process.env.API_URL || 'http://localhost:8080';
+// as defined in webpack.config.js
+export const { API_URL } = process.env;
 
 export const CACHE_EXPIRE_MIN = 15;
