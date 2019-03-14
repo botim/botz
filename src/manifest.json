@@ -20,6 +20,5 @@
       "run_at": "document_start"
     }
   ],
-  "web_accessible_resources": ["images/*.png", "*.css"],
-  "permissions": ["notifications"]
+  "web_accessible_resources": ["images/*.png", "*.css"]
 }
