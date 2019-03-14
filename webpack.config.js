@@ -2,10 +2,12 @@
 
 const path = require('path');
 const { EnvironmentPlugin } = require('webpack');
+const SizePlugin = require('size-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const GoogleFontsPlugin = require('google-fonts-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const srcFolder = 'src';
 const distFolder = 'dist';
@@ -49,6 +51,7 @@ module.exports = (env, argv) => ({
     ]
   },
   plugins: [
+    new SizePlugin(),
     new EnvironmentPlugin({
       API_URL: apiUrls[argv.mode]
     }),
@@ -80,5 +83,20 @@ module.exports = (env, argv) => ({
   ],
   resolve: {
     extensions: srcFileExtensions
+  },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          mangle: false,
+          compress: false,
+          output: {
+            beautify: true,
+            indent_level: 2
+          }
+        }
+      })
+    ]
   }
 });

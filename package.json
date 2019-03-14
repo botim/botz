@@ -30,6 +30,7 @@
     "node-sass": "^4.11.0",
     "prettier": "^1.16.4",
     "sass-loader": "^7.1.0",
+    "size-plugin": "^1.1.2",
     "ts-loader": "^5.3.3",
     "tslint": "^5.13.0",
     "tslint-config-prettier": "^1.18.0",
