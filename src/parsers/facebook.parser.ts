@@ -128,7 +128,7 @@ export class FacebookParser implements Parser {
       return;
     }
 
-    const statuses = await this._apiService.checkIfBot(Object.keys(mappedPosts));
+    const statuses = await this._apiService.checkIfBot({ ...mappedPosts });
 
     for (const userId of Object.keys(statuses)) {
       this._checkPost(mappedPosts[userId], statuses[userId]);

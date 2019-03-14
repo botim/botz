@@ -8,6 +8,7 @@ export class ApiService {
 
   constructor(private _platform: string) {}
 
+  // TODO: change to array
   public async checkIfBot(userIds: ObjectKeyMap<any>): Promise<ObjectKeyMap<Status>> {
     const cachedStatuses = await this._getFromCache(Object.keys(userIds));
 
