@@ -33,6 +33,15 @@ export class CacheService {
   }
 
   /**
+   * Remove a key from the store.
+   *
+   * @param key
+   */
+  public remove(key: string): Promise<void> {
+    return del(key, this._store);
+  }
+
+  /**
    * Check if key has expired and remove him.
    *
    * @param key
@@ -47,7 +56,7 @@ export class CacheService {
     const elapsedSeconds = Math.round(elapsedTime / 1000);
 
     if (elapsedSeconds > 60 * CACHE_EXPIRE_MIN) {
-      del(key, this._store);
+      this.remove(key);
 
       return true;
     }
