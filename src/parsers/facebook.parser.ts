@@ -139,9 +139,9 @@ export class FacebookParser implements Parser {
    * Mark post/comment as bot after checking against the api.
    *
    * @param post
-   * @param userId
+   * @param status
    */
-  private async _checkPost(post: HTMLElement, userId: string) {
+  private async _checkPost(post: HTMLElement, status: Status) {
     post.classList.add(VISITED_CLASS);
 
     try {
