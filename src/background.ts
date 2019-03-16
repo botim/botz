@@ -1,11 +1,11 @@
 import { MessageTypes } from './core/symbols';
 import { API_URL } from './core/consts';
 
-async function onReportMessage(body: any) {
+async function onReportMessage(body: any, reporterKey: string) {
   const response = await fetch(`${API_URL}/report`, {
     method: 'post',
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json', Authorization: reporterKey }
   });
 
   return response.status;
@@ -18,6 +18,7 @@ browser.runtime.onMessage.addListener((message, _, respond) => {
   }
 
   if (message.type === MessageTypes.REPORT) {
-    return onReportMessage(message.body);
+    const { reporterKey, ...body } = message.body;
+    return onReportMessage(body, reporterKey);
   }
 });
