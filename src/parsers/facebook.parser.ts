@@ -1,7 +1,6 @@
 import {
   VISITED_CLASS,
   DETECTED_BOT_CLASS,
-  REPORTED_BUTTON_CLASS,
   ready,
   detectChanges,
   createReportButton,
@@ -147,10 +146,6 @@ export class FacebookParser implements Parser {
     try {
       if (status === Status.BOT) {
         post.classList.add(DETECTED_BOT_CLASS);
-      }
-
-      if (status === Status.REPORTED) {
-        post.classList.add(REPORTED_BUTTON_CLASS);
       }
 
       this._addEventListenersToPost(post);

@@ -1,7 +1,6 @@
 import {
   VISITED_CLASS,
   DETECTED_BOT_CLASS,
-  REPORTED_BUTTON_CLASS,
   ready,
   detectChanges,
   createReportButton,
@@ -15,8 +14,6 @@ import {
 import { Parser } from './parser';
 
 const pageChangesSelector = 'body';
-
-// TODO: username? handler?
 
 const tweetsSelector = '.tweet';
 const quotedTweetsSelector = '.QuoteTweet-innerContainer';
@@ -126,10 +123,6 @@ export class TwitterParser implements Parser {
     try {
       if (status === Status.BOT) {
         tweet.classList.add(DETECTED_BOT_CLASS);
-      }
-
-      if (status === Status.REPORTED) {
-        tweet.classList.add(REPORTED_BUTTON_CLASS);
       }
 
       this._addEventListenersToTweet(tweet);

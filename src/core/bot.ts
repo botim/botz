@@ -5,8 +5,7 @@ import {
   MODAL_SUBMIT_CLASS,
   MODAL_CLOSE_CLASS,
   MODAL_WRAPPER_SUBMITTED_CLASS,
-  REPORTED_BUTTON_CLASS,
-  MODAL_REPORTER_KEY_SHOW_CLASS as MODAL_HIDE_REPORTER_KEY_CLASS
+  MODAL_HIDE_REPORTER_KEY_CLASS
 } from './consts';
 import { ObjectKeyMap, UserData } from './symbols';
 import { Parser } from '../parsers';
@@ -26,14 +25,12 @@ export function createReportButton(parser: Parser): HTMLElement {
     // prevent clicking on the profile image
     event.preventDefault();
 
-    const postElement = parser.getPostElement(this);
     const input = await openModal('report', parser.getUserData(this));
 
     if (input) {
       try {
         window.localStorage[STORAGE_REPORTER_KEY] = input.reporterKey;
         await parser.reportUser(input);
-        postElement.classList.add(REPORTED_BUTTON_CLASS);
       } catch (error) {
         delete window.localStorage[STORAGE_REPORTER_KEY];
         openModal('invalid-reporter-key');

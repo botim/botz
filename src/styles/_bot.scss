@@ -66,12 +66,3 @@ $background-opacity: linear-gradient(
     left: 30px;
   }
 }
-
-.botz-reported-button .botz-report-button {
-  pointer-events: none;
-  background-image: url($url-chrome+'icon_small_bw.png');
-
-  @-moz-document url-prefix() {
-    background-image: url($url-mozilla+'icon_small_bw.png');
-  }
-}
