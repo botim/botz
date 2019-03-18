@@ -38,6 +38,38 @@
       ]
     },
     {
+      "login": "eranshmil",
+      "name": "Eran Shmil",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/9721664?v=4",
+      "profile": "https://twitter.com/eranshmil",
+      "contributions": [
+        "ideas",
+        "infra",
+        "code"
+      ]
+    },
+    {
+      "login": "ylarom",
+      "name": "Yuval Larom",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3155058?s=460&v=4",
+      "profile": "https://twitter.com/ylarom",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "abloch",
+      "name": "Akiva",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1175033?v=4",
+      "profile": "http://t35t37.wordpress.com/",
+      "contributions": [
+        "ideas",
+        "infra",
+        "code"
+      ]
+    },
+    {
       "login": "ceranco",
       "name": "Eran Cohen",
       "avatar_url": "https://avatars2.githubusercontent.com/u/22302978?v=4",
@@ -52,28 +84,6 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/18573920?v=4",
       "profile": "https://github.com/TomKizaru",
       "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "eranshmil",
-      "name": "Eran Shmil",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/9721664?v=4",
-      "profile": "https://twitter.com/eranshmil",
-      "contributions": [
-        "ideas",
-        "infra",
-        "code"
-      ]
-    },
-    {
-      "login": "abloch",
-      "name": "Akiva",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/1175033?v=4",
-      "profile": "http://t35t37.wordpress.com/",
-      "contributions": [
-        "ideas",
-        "infra",
         "code"
       ]
     }
