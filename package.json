@@ -1,7 +1,7 @@
 {
   "name": "botz",
   "description": "Recognizes suspicious social media behavior.",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "repository": "https://github.com/botim/botz.git",
   "license": "GPL-3.0",
   "scripts": {

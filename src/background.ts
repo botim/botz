@@ -18,7 +18,9 @@ browser.runtime.onMessage.addListener((message, _, respond) => {
   }
 
   if (message.type === MessageTypes.REPORT) {
-    const { reporterKey, ...body } = message.body;
+    // const { reporterKey, ...body } = message.body;
+    const { body } = message;
+    const reporterKey = 'Bots-R-us';
     return onReportMessage(body, reporterKey);
   }
 });

@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Botz",
-  "version": "1.0",
-  "description": "Recognizes suspicious social media behavior.",
+  "version": "1.0.5",
+  "description": "פרויקט הבוטים הגדול מוקדש לזהות פעילויות לא אורגניות בפלטפורמות החברתיות.",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",

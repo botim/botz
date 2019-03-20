@@ -10,7 +10,7 @@ import {
 import { ObjectKeyMap, UserData } from './symbols';
 import { Parser } from '../parsers';
 
-const STORAGE_REPORTER_KEY = 'botzReporterKey';
+// const STORAGE_REPORTER_KEY = 'botzReporterKey';
 
 /**
  * Create a link element to report a user.
@@ -29,11 +29,11 @@ export function createReportButton(parser: Parser): HTMLElement {
 
     if (input) {
       try {
-        window.localStorage[STORAGE_REPORTER_KEY] = input.reporterKey;
+        // window.localStorage[STORAGE_REPORTER_KEY] = input.reporterKey;
         await parser.reportUser(input);
       } catch (error) {
-        delete window.localStorage[STORAGE_REPORTER_KEY];
-        openModal('invalid-reporter-key');
+        // delete window.localStorage[STORAGE_REPORTER_KEY];
+        // openModal('invalid-reporter-key');
       }
     }
   });
@@ -65,17 +65,17 @@ export async function loadTemplate(name: string, data?: Partial<UserData>): Prom
  * If there's already a reporter key in local storage,
  *  set it in form and hide reporter key input
  */
-function initReporterKeyInput(modalWrapperElement: Element) {
-  const reporterKeyInput: HTMLInputElement = modalWrapperElement.querySelector(
-    '[name="reporterKey"]'
-  );
-  const reporterKey = window.localStorage[STORAGE_REPORTER_KEY] || null;
+// function initReporterKeyInput(modalWrapperElement: Element) {
+//   const reporterKeyInput: HTMLInputElement = modalWrapperElement.querySelector(
+//     '[name="reporterKey"]'
+//   );
+//   const reporterKey = window.localStorage[STORAGE_REPORTER_KEY] || null;
 
-  if (reporterKey) {
-    reporterKeyInput.value = reporterKey;
-    reporterKeyInput.classList.add(MODAL_HIDE_REPORTER_KEY_CLASS);
-  }
-}
+//   if (reporterKey) {
+//     reporterKeyInput.value = reporterKey;
+//     reporterKeyInput.classList.add(MODAL_HIDE_REPORTER_KEY_CLASS);
+//   }
+// }
 
 /**
  * Open modal on the screen and send form data to server.
@@ -124,7 +124,7 @@ export async function openModal(
       .querySelector(`.${MODAL_CLOSE_CLASS}`)
       .addEventListener('click', () => modalWrapperElement.remove());
 
-    initReporterKeyInput(modalWrapperElement);
+    // initReporterKeyInput(modalWrapperElement);
   });
 }
 

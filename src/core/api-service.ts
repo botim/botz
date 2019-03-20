@@ -28,9 +28,9 @@ export class ApiService {
   }
 
   public async report(body: any): Promise<boolean> {
-    if (!body.reporterKey) {
-      throw new Error('מפתח מדווח חסר או שגוי');
-    }
+    // if (!body.reporterKey) {
+    //   throw new Error('מפתח מדווח חסר או שגוי');
+    // }
 
     const responseStatus: number = await window.browser.runtime.sendMessage({
       type: MessageTypes.REPORT,
