@@ -1,9 +1,9 @@
 # Botz
 
-Botz is a Chrome/Firefox extension that detects suspicious bot activity.
+Botz is a Chrome/Firefox extension that detects suspicious bot activity.  
+The Big Bots Project is a social experiment aimed at identifying bots and sock puppets in the social platforms feeds.
 
-Hat tip to [noam-r](https://github.com/noam-r) & [Yuval Adam](https://github.com/yuvadm) for leading the entire project.
-
+Hat tip to [noam-r](https://github.com/noam-r) & [Yuval Adam](https://github.com/yuvadm) for leading the entire project.  
 Thanks to anyone who participated in botim.online Hackathons!
 
 Visit <https://botim.online> to support the project and to submit bot reports.
