@@ -66,3 +66,7 @@ $background-opacity: linear-gradient(
     left: 30px;
   }
 }
+
+[dir='rtl'] .botz-report-button {
+  right: -64px;
+}
